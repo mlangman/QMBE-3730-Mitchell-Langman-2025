@@ -1,0 +1,90 @@
+
+R version 3.6.3 (2020-02-29) -- "Holding the Windsock"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.70 (7735) x86_64-apple-darwin15.6.0]
+
+[History restored from /Users/mitchelllangman/.Rapp.history]
+
+2025-02-02 19:37:06.830 R[98936:944748] +[IMKClient subclass]: chose IMKClient_Modern
+2025-02-02 19:37:07.558 R[98936:944748] +[IMKInputSession subclass]: chose IMKInputSession_Modern
+2025-02-02 19:37:26.720 R[98936:944748] The class 'NSOpenPanel' overrides the method identifier.  This method is implemented by class 'NSWindow'
+> # Load necessary libraries
+> library(ggplot2)
+Error in library(ggplot2) : there is no package called ‘ggplot2’
+> library(dplyr)
+Error in library(dplyr) : there is no package called ‘dplyr’
+> library(ggmiss)
+Error in library(ggmiss) : there is no package called ‘ggmiss’
+> library(naniar)
+Error in library(naniar) : there is no package called ‘naniar’
+> 
+> # Load the dataset
+> file_path <- "/mnt/data/netflix_titles (1).csv"
+> df <- read.csv(file_path, stringsAsFactors = FALSE)
+Error in file(file, "rt") : cannot open the connection
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file '/mnt/data/netflix_titles (1).csv': No such file or directory
+> 
+> # Get the shape of the dataset
+> num_rows <- nrow(df)
+> num_cols <- ncol(df)
+> cat("Shape of the dataset:", num_rows, "rows and", num_cols, "columns\n\n")
+Shape of the dataset: rows and columns
+
+> 
+> # Display column names
+> cat("Column names:\n")
+Column names:
+> print(colnames(df))
+NULL
+> 
+> # Display data types
+> cat("\nData types:\n")
+
+Data types:
+> print(str(df))
+function (x, df1, df2, ncp, log = FALSE)  
+NULL
+> 
+> # Count missing values
+> cat("\nMissing values per column:\n")
+
+Missing values per column:
+> print(colSums(is.na(df)))
+Error in colSums(is.na(df)) : 
+  'x' must be an array of at least two dimensions
+In addition: Warning message:
+In is.na(df) : is.na() applied to non-(list or vector) of type 'closure'
+> 
+> # Summary statistics
+> cat("\nSummary Statistics:\n")
+
+Summary Statistics:
+> print(summary(df))
+Error in object[[i]] : object of type 'closure' is not subsettable
+> 
+> # Visualization of missing data
+> gg_miss_var(df) + 
++   ggtitle("Missing Data by Column") + 
++   theme_minimal()
+Error in gg_miss_var(df) : could not find function "gg_miss_var"
+> 
+2025-02-02 19:38:35.202 R[98936:944748] The class 'NSSavePanel' overrides the method identifier.  This method is implemented by class 'NSWindow'
+> 
