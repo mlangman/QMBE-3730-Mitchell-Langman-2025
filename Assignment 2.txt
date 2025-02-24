@@ -1,0 +1,197 @@
+
+R version 3.6.3 (2020-02-29) -- "Holding the Windsock"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.70 (7735) x86_64-apple-darwin15.6.0]
+
+[Workspace restored from /Users/mitchelllangman/.RData]
+[History restored from /Users/mitchelllangman/.Rapp.history]
+
+2025-02-23 20:05:57.445 R[14081:490371] +[IMKClient subclass]: chose IMKClient_Modern
+2025-02-23 20:05:58.142 R[14081:490371] +[IMKInputSession subclass]: chose IMKInputSession_Modern
+> source("/Users/mitchelllangman/Downloads/admit.csv")
+2025-02-23 20:06:00.568 R[14081:490371] The class 'NSOpenPanel' overrides the method identifier.  This method is implemented by class 'NSWindow'
+Error in source("/Users/mitchelllangman/Downloads/admit.csv") : 
+  /Users/mitchelllangman/Downloads/admit.csv:1:6: unexpected ','
+1: admit,
+         ^
+> getwd()
+[1] "/Users/mitchelllangman"
+> 
+> setwd("~/Downloads")  # Adjust to your actual file path
+> 
+> df <- read.csv("admit.csv")
+> head(df)  # Check if the data loads correctly
+  admit gre  gpa rank
+1     0 380 3.61    3
+2     1 660 3.67    3
+3     1 800 4.00    1
+4     1 640 3.19    4
+5     0 520 2.93    4
+6     1 760 3.00    2
+> 
+> install.packages("caTools", dependencies = TRUE)
+--- Please select a CRAN mirror for use in this session ---
+also installing the dependency ‘bitops’
+
+Warning: unable to access index for repository https://cloud.r-project.org/bin/macosx/el-capitan/contrib/3.6:
+  cannot open URL 'https://cloud.r-project.org/bin/macosx/el-capitan/contrib/3.6/PACKAGES'
+Packages which are only available in source form, and may need
+  compilation of C/C++/Fortran: ‘bitops’ ‘caTools’
+library(caTools)
+library(caret)
+library(e1071)  # Required for caret's confusion matrix
+
+Do you want to attempt to install these from sources? (Yes/no/cancel) install.packages("caret", dependencies = TRUE)
+Error in askYesNo("Do you want to attempt to install these from sources?") : 
+  Unrecognized response “install.packages("caret", dependencies = TRUE)”
+> install.packages("e1071")  # Needed for caret's confusion matrix
+also installing the dependency ‘proxy’
+
+Warning: unable to access index for repository https://cloud.r-project.org/bin/macosx/el-capitan/contrib/3.6:
+  cannot open URL 'https://cloud.r-project.org/bin/macosx/el-capitan/contrib/3.6/PACKAGES'
+Packages which are only available in source form, and may need
+  compilation of C/C++/Fortran: ‘proxy’ ‘e1071’
+Do you want to attempt to install these from sources? (Yes/no/cancel) 
+installing the source packages ‘proxy’, ‘e1071’
+
+trying URL 'https://cloud.r-project.org/src/contrib/proxy_0.4-27.tar.gz'
+Content type 'application/x-gzip' length 74622 bytes (72 KB)
+==================================================
+downloaded 72 KB
+
+trying URL 'https://cloud.r-project.org/src/contrib/e1071_1.7-16.tar.gz'
+Content type 'application/x-gzip' length 326734 bytes (319 KB)
+==================================================
+downloaded 319 KB
+
+* installing *source* package ‘proxy’ ...
+** package ‘proxy’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c apply.c -o apply.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c arrayIndex.c -o arrayIndex.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c distance.c -o distance.o
+distance.c:429:2: warning: add explicit braces to avoid dangling else [-Wdangling-else]
+  429 |         else
+      |         ^
+distance.c:476:2: warning: add explicit braces to avoid dangling else [-Wdangling-else]
+  476 |         else
+      |         ^
+2 warnings generated.
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c dll.c -o dll.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c util.c -o util.o
+clang -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o proxy.so apply.o arrayIndex.o distance.o dll.o util.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+ld: warning: -single_module is obsolete
+ld: warning: -multiply_defined is obsolete
+installing to /Library/Frameworks/R.framework/Versions/3.6/Resources/library/00LOCK-proxy/00new/proxy/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (proxy)
+* installing *source* package ‘e1071’ ...
+** package ‘e1071’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c Rsvm.c -o Rsvm.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c cmeans.c -o cmeans.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c cshell.c -o cshell.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c floyd.c -o floyd.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c init.c -o init.o
+clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c svm.cpp -o svm.o
+clang++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o e1071.so Rsvm.o cmeans.o cshell.o floyd.o init.o svm.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+ld: warning: -single_module is obsolete
+ld: warning: -multiply_defined is obsolete
+installing to /Library/Frameworks/R.framework/Versions/3.6/Resources/library/00LOCK-e1071/00new/e1071/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (e1071)
+
+The downloaded source packages are in
+	‘/private/var/folders/hf/f6z2wd5x3232jdn30srl2_940000gn/T/RtmpK1Ethp/downloaded_packages’
+> library(caTools)
+Error in library(caTools) : there is no package called ‘caTools’
+> library(caret)
+Error in library(caret) : there is no package called ‘caret’
+> library(e1071)  # Required for caret's confusion matrix
+> 
+> set.seed(42)  # For reproducibility
+> split <- sample.split(df$admit, SplitRatio = 0.8)  # 80% training, 20% testing
+Error in sample.split(df$admit, SplitRatio = 0.8) : 
+  could not find function "sample.split"
+> train <- subset(df, split == TRUE)
+Error in split == TRUE : 
+  comparison (1) is possible only for atomic and list types
+> test <- subset(df, split == FALSE)
+Error in split == FALSE : 
+  comparison (1) is possible only for atomic and list types
+> 
+> # Check dimensions
+> dim(train)
+Error: object 'train' not found
+> dim(test)
+Error: object 'test' not found
+> 
+> model <- glm(admit ~ gre + gpa + rank, data = train, family = binomial)
+Error in is.data.frame(data) : object 'train' not found
+> summary(model)  # View model details
+Error in summary(model) : object 'model' not found
+> 
+> test$prob <- predict(model, test, type = "response")
+Error in predict(model, test, type = "response") : 
+  object 'model' not found
+> test$pred <- ifelse(test$prob > 0.5, 1, 0)  # Convert probabilities to binary outcomes
+Error in ifelse(test$prob > 0.5, 1, 0) : object 'test' not found
+> 
+> # Check predictions
+> head(test[, c("admit", "prob", "pred")])
+Error in head(test[, c("admit", "prob", "pred")]) : 
+  object 'test' not found
+> 
+> conf_matrix <- confusionMatrix(factor(test$pred), factor(test$admit))
+Error in confusionMatrix(factor(test$pred), factor(test$admit)) : 
+  could not find function "confusionMatrix"
+> print(conf_matrix)
+Error in print(conf_matrix) : object 'conf_matrix' not found
+> 
+> table(Predicted = test$pred, Actual = test$admit)
+Error in table(Predicted = test$pred, Actual = test$admit) : 
+  object 'test' not found
+> 
+> exp(coef(model))  # Odds ratios for interpretation
+Error in coef(model) : object 'model' not found
+> 
+2025-02-23 20:09:39.185 R[14081:490371] The class 'NSSavePanel' overrides the method identifier.  This method is implemented by class 'NSWindow'
+> 
